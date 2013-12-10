@@ -30,7 +30,8 @@ module TaoBaoApi
 
       {:title => title,
         :price => price,
-        :img => img}
+        :img => img,
+        :url => url}
     end
 
     private

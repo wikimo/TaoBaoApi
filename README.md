@@ -26,7 +26,7 @@ good = TaoBaoApi::Good.new
 
 info  = good.get_info 'http://item.taobao.com/item.htm?id=16434110195'
 
-p info #hash format,{:title => xxx, :price => xxx, :img => xxx}
+p info #hash format,{:title => xxx, :price => xxx, :img => xxx, :url => url}
 
 ```
 测试文件见test.rb
