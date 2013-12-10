@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = TaoBaoApi::VERSION
   spec.authors       = ["wikimo"]
   spec.email         = ["gwikimo@gmail.com"]
-  spec.description   = %q{ get goods from taobao}
-  spec.summary       = %q{ get goods from taobao}
+  spec.description   = %q{ get goods info from taobao}
+  spec.summary       = %q{ get goods info from taobao just with url}
   spec.homepage      = ""
   spec.license       = "MIT"
 

@@ -5,12 +5,18 @@ require 'open-uri'
 module TaoBaoApi
   class	Good
   	def get_info url
-  		return nil if !url
+  		return 'good_url_nil' if url.nil?
 
 		doc = Nokogiri::HTML(open(url)) 
 		doc.encoding = 'utf-8'
 
-		title = title_fiter(doc.css('.tb-detail-hd').first.text.strip)
+		begin
+			title = doc.css('.tb-detail-hd').first.text
+		rescue NoMethodError
+			return 'good_not_exists'
+		end
+
+		title = title_fiter(title.strip)
 
 		if url.include? 'taobao'
 			price = doc.css('em.tb-rmb-num').first.text
@@ -19,7 +25,7 @@ module TaoBaoApi
 			price = doc.css('.J_originalPrice').first.text.strip
 			img = doc.css('#J_ImgBooth').first.attr('src')
 		else
-			return 'undefined'
+			return 'good_url_is_not_taobao'
 		end
 
 		{:title => title,
@@ -29,8 +35,9 @@ module TaoBaoApi
 
   	private
 	  def title_fiter(title)
-		filter_char = ["\n","\r","\t",' ']
+		title = title.split("\r\n")[0]
 
+		filter_char = ["\n","\r","\t",' ']
 		filter_char.each do |s|
 			title = title.gsub(s,'')
 		end
