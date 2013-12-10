@@ -6,7 +6,7 @@
 
 在 Gemfile 文件中加入以下代码:
 
-    gem "TaoBaoApi", "~> 0.0.1"
+    gem "TaoBaoApi", "~> 0.0.2"
 
 然后执行:
 
