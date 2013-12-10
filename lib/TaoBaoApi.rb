@@ -3,9 +3,9 @@ require 'nokogiri'
 require 'open-uri'
 
 module TaoBaoApi
-  class	Good
-    def get_info url
-  		return 'good_url_nil' if url.nil?
+	class  Good
+		def get_info url
+			return 'good_url_nil' if url.nil?
 
 		  doc = Nokogiri::HTML(open(url)) 
 		  doc.encoding = 'utf-8'
@@ -31,7 +31,7 @@ module TaoBaoApi
 		  {:title => title,
 			  :price => price,
 			  :img => img}
-  	  end
+  	end
 
   	private
 	    def title_fiter(title)
@@ -44,6 +44,5 @@ module TaoBaoApi
 
 		    title
 	    end
-
   end
 end
