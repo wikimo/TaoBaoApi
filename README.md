@@ -16,7 +16,7 @@
 
     $ gem install TaoBaoApi
 
-## Usage
+## 使用方法
 
 ```ruby
 
