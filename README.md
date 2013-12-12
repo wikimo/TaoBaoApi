@@ -12,7 +12,7 @@
 
     $ bundle
 
-或者你可以通过 em installl 直接安装:
+或者你可以通过 gem installl 直接安装:
 
     $ gem install TaoBaoApi
 
