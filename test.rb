@@ -2,6 +2,7 @@ require File.join(File.dirname(__FILE__), 'lib', 'TaoBaoApi')
 
 good = TaoBaoApi::Good.new
 
-info  = good.get_info 'http://item.taobao.com/item.htm?id=36315104957'
+url  = 'http://detail.tmall.com/item.htm?id=35576507007'
+info  = good.get_info url
 
 p info

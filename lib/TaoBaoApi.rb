@@ -7,70 +7,49 @@ module TaoBaoApi
     def get_info url
       return 'good_url_nil' if url.nil?
 
-      url = url_clean(url)
-
+      url = url_filter(url)
       doc = Nokogiri::HTML(open(url)) 
       doc.encoding = 'utf-8'
-      # p doc
+  
       begin
-        title = doc.css('title').first.text
+        title = doc.css('title').first.text.split('-').first.strip
       rescue NoMethodError
         return 'good_not_exists'
       end
 
-
-      #title = title_fiter(title.strip)
-      # title =  doc.css('title').first.text.split('-').first
-      title = title_filter(title)
-
-      images = Array.new()
-
-
+      images = []
       if url.include? 'taobao'
         price = doc.css('em.tb-rmb-num').first.text
-        doc.css('#J_UlThumb').first.css('img').each do |img|
-          img = img.attr('data-src')
-          images.push(image_filter(img))
-        end
+        img_src = 'data-src'
       elsif url.include? 'tmall'
         price = doc.css('.J_originalPrice').first.text.strip
-        doc.css('#J_UlThumb').first.css('img').each do |img|
-          img = img.attr('src')
-          images.push(image_filter(img))
-        end
+        img_src = 'src'
       else
         return 'good_url_is_not_taobao'
       end
 
+      doc.css('#J_UlThumb').first.css('img').each do |img|
+        img = img.attr(img_src)
+        images << image_filter(img)
+      end
+
       {:title => title,
         :price => price,
-        :img => images,
+        :images => images,
         :url => url}
     end
 
   private
-    def title_filter(title)
-      title = title.split("\r\n")[0]
-      title = title.split("-")[0]
-
-      filter_char = ["\n","\r","\t"]
-      filter_char.each do |s|
-        title = title.gsub(s,'')
-      end
-
-      title
-    end
-
     def image_filter(imgUrl)
-      imgUrl = imgUrl.split('.jpg')[0] + '.jpg'
+      "#{imgUrl.split('.jpg').first}.jpg"
     end
 
-    def url_clean(url)
+    def url_filter(url)
       if url.include?'s.click.taobao.com'
-        refer = open(url).base_uri.to_s.split('URL:')[0]
+        refer = open(url).base_uri.to_s.split('URL:').first
         open(URI.unescape(refer.split('tu=')[1]),"Referer" => refer).base_uri.to_s.split('&ali_trackid=')[0]
       else
-        url = url.split('/item.htm?')[0] + '/item.htm?id=' + url.split('id=')[1].split('&')[0]
+        url = url.split('/item.htm?').first + '/item.htm?id=' + url.split('id=').last.split('&').first
       end
     end
 
