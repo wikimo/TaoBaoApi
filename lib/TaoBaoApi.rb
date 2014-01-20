@@ -9,14 +9,15 @@ module TaoBaoApi
 
       doc = Nokogiri::HTML(open(url)) 
       doc.encoding = 'utf-8'
-
+      # p doc
       begin
         title = doc.css('.tb-detail-hd').first.text
       rescue NoMethodError
         return 'good_not_exists'
       end
 
-      title = title_fiter(title.strip)
+      #title = title_fiter(title.strip)
+      title =  doc.css('title').first.text.split('-').first
 
       if url.include? 'taobao'
         price = doc.css('em.tb-rmb-num').first.text
@@ -35,6 +36,7 @@ module TaoBaoApi
     end
 
     private
+      #deprecated
       def title_fiter(title)
         title = title.split("\r\n")[0]
 
