@@ -39,3 +39,6 @@ p info #hash format,{:title => xxx, :price => xxx, :images => [], :url => url}
 
 ## Todo
 * 获取促销价
+
+## update list
+* 改进价格获取失败的问题；

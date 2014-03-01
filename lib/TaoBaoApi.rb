@@ -93,6 +93,8 @@ module TaoBaoApi
     #格式化16.0 - 18.0 类似这样的价格区间
     def price_filter price
       price = price.split('-').first.strip if !price.nil? && price.include?('-')
+
+      price
     end
 
   end
