@@ -32,14 +32,11 @@ good = TaoBaoApi::Good.new 'http://item.taobao.com/item.htm?id=16434110195'
 
 info  = good.get_info
 
-p info #hash format,{:title => xxx, :price => xxx, :images => [], :url => url}
+p info #hash format,{:title => xxx, :price => xxx, :promo_price => xxx, :images => [], :url => url}
 
 ```
 测试文件见test.rb
 
-## Todo
-* 获取促销价
-* Timeout
-
-## update list
-* 改进价格获取失败的问题；
+## Update
+* 加入了获取促销价功能 20140513；
+* 改进价格获取失败的问题 20140302；
