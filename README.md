@@ -18,7 +18,7 @@ nokogiri, faraday, faraday_middleware
 
     $ bundle
 
-或者你可以通过 gem installl 直接安装:
+或者你可以通过 gem install 直接安装:
 
     $ gem install TaoBaoApi
 
